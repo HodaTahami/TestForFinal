@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+
+</head>
+<style> /* set the CSS */
+
+body { font: 12px Arial;}
+
+path {
+    stroke: steelblue;
+    stroke-width: 2;
+    fill: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: grey;
+    stroke-width: 1;
+    shape-rendering: crispEdges;
+}
+
+</style>
+<body>
+
+<!--<div class="btn-group">-->
+<!--&lt;!&ndash; Standard button &ndash;&gt;-->
+<!--<button type="button" class="btn btn-default">Farmers</button>-->
+
+<!--&lt;!&ndash; Provides extra visual weight and identifies the primary action in a set of buttons &ndash;&gt;-->
+<!--<button type="button" class="btn btn-primary">Energy</button>-->
+
+<!--&lt;!&ndash; Indicates a successful or positive action &ndash;&gt;-->
+<!--<button type="button" class="btn btn-success">DataCenter</button>-->
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-sm-2" style="background-color:lightblue;">
+            <!--Selectable lists of actions </br>-->
+            <!--<h3>List of Actions :</h3>-->
+            <!--<ul class="nav nav-pills nav-stacked">-->
+                <!--<li><a href="#">Action 1</a></li>-->
+                <!--<li><a href="#">Action 2</a></li>-->
+                <!--<li><a href="#">Action 3</a></li>-->
+            <!--</ul>-->
+
+
+            <div class="panel-group">
+                <h3></h3>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" href="#collapse1">Select the actions:</a>
+                        </h4>
+                    </div>
+                    <div id="collapse1" class="panel-collapse collapse">
+                        <ul class="nav nav-pills nav-stacked">
+                        <li><a href="#"  name="updateButton" value="Update" onclick="updateData()">Action 1</a></li>
+                        <li><a href="#">Action 2</a></li>
+                        <li><a href="#">Action 3</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <!--<div class="dropdown">-->
+                <!--<h3>List of Actions :</h3>-->
+                <!--<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">List of actions:-->
+                    <!--<span class="caret"></span></button>-->
+                <!--<ul class="dropdown-menu">-->
+                    <!--<li><a href="#">Action 1</a></li>-->
+                    <!--<li><a href="#">Action 2</a></li>-->
+                    <!--<li><a href="#">Action 3</a></li>-->
+
+                <!--</ul>-->
+            <!--</div>-->
+
+        </div>
+
+
+
+
+        <div class="col-sm-6" style="background-color:lightblue;">
+
+        </div>
+
+
+
+        <div class="col-sm-4" style="background-color:lightblue;">
+            <h3></h3>
+            <button class="btn btn-default" type="button" id="showChart" >Farmers</button>
+            <button class="btn btn-default" type="button">Energy</button>
+            <button class="btn btn-default" type="button">DataCenter</button>
+            <button class="btn btn-default" type="button">other</button>
+
+            <div id="emptyspace1" style="width:500px; height: 10px;"></div>
+            <div id="chart_div" style="width:500px; height: 300px;"></div>
+            <div id="emptyspace2" style="width:500px; height: 20px;"></div>
+            <div id="chart_div2" style="width:500px; height: 300px;"></div>
+            <div id="emptyspace3" style="width:500px; height: 20px;"></div>
+
+            <!--<h3>Select your actors: </h3>-->
+            <!--<ul class="list-inline">-->
+                <!--<li><a href="#">Farmers</a></li>-->
+                <!--<li><a href="#">Energy</a></li>-->
+                <!--<li><a href="#">DataCenter</a></li>-->
+                <!--<li><a href="#">other</a></li>-->
+            <!--</ul>-->
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+    google.load("visualization", "1", {
+        packages: ["corechart"]
+    });
+
+    google.setOnLoadCallback(initialise);
+
+    function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+                ['Year', 'NetRev', 'EnergyCost'],
+                ['2005', 1000, 400],
+                ['2010', 1170, 460],
+                ['2015', 660, 1120],
+                ['2020', 1030, 540]
+
+            ]
+        );
+        var data2 = google.visualization.arrayToDataTable([
+                ['Year', 'factor2', 'factor3'],
+                ['2005', 400, 1000],
+                ['2010', 1170, 460],
+                ['2015', 560, 800],
+                ['2020', 1030, 540]
+
+            ]
+        );
+        var options = {
+            title: 'NetRevenue versus EnergyCost'
+        };
+
+        var options2 = {
+            title: 'factor2 versus factor3'
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+
+    }
+    function drawChart2() {
+
+        var data2 = google.visualization.arrayToDataTable([
+                ['Year', 'factor2', 'factor3'],
+                ['2005', 400, 1000],
+                ['2010', 1170, 460],
+                ['2015', 560, 800],
+                ['2020', 1030, 540]
+
+            ]
+        );
+
+        var options2 = {
+            title: 'factor2 versus factor3'
+        };
+
+        var chart2 = new google.visualization.LineChart(document.getElementById('chart_div2'));
+        chart2.draw(data2, options2);
+    }
+    function initialise(){
+        var button = document.getElementById('showChart');
+        button.onclick = function () {
+            drawChart();
+            drawChart2();
+//            button.parentNode.removeChild(button);
+        };
+    }
+
+
+    // Set the dimensions of the canvas / graph
+    var margin = {top: 30, right: 20, bottom: 30, left: 50},
+        width = 600 - margin.left - margin.right,
+        height = 270 - margin.top - margin.bottom;
+
+    // Parse the date / time
+    var parseDate = d3.time.format("%d-%b-%y").parse;
+
+    // Set the ranges
+    var x = d3.time.scale().range([0, width]);
+    var y = d3.scale.linear().range([height, 0]);
+
+    // Define the axes
+    var xAxis = d3.svg.axis().scale(x)
+        .orient("bottom").ticks(5);
+
+    var yAxis = d3.svg.axis().scale(y)
+        .orient("left").ticks(5);
+
+    // Define the line
+    var valueline = d3.svg.line()
+        .x(function(d) { return x(d.date); })
+        .y(function(d) { return y(d.close); });
+
+    // Adds the svg canvas
+    var svg = d3.select("body")
+        .append("svg")
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
+
+    // Get the data
+    d3.csv('assets/data.csv', function(error, data) {
+        data.forEach(function(d) {
+            d.date = parseDate(d.date);
+            d.close = +d.close;
+        });
+
+        // Scale the range of the data
+        x.domain(d3.extent(data, function(d) { return d.date; }));
+        y.domain([0, d3.max(data, function(d) { return d.close; })]);
+
+        // Add the valueline path.
+        svg.append("path")
+            .attr("class", "line")
+            .attr("d", valueline(data));
+
+        // Add the X Axis
+        svg.append("g")
+            .attr("class", "x axis")
+            .attr("transform", "translate(0," + height + ")")
+            .call(xAxis);
+
+        // Add the Y Axis
+        svg.append("g")
+            .attr("class", "y axis")
+            .call(yAxis);
+
+    });
+
+    // ** Update data section (Called from the onclick)
+    function updateData() {
+
+        // Get the data again
+        d3.csv("assets/data-alt.csv", function(error, data) {
+            data.forEach(function(d) {
+                d.date = parseDate(d.date);
+                d.close = +d.close;
+            });
+
+            // Scale the range of the data again
+            x.domain(d3.extent(data, function(d) { return d.date; }));
+            y.domain([0, d3.max(data, function(d) { return d.close; })]);
+
+            // Select the section we want to apply our changes to
+            var svg = d3.select("body").transition();
+
+            // Make the changes
+            svg.select(".line")   // change the line
+                .duration(750)
+                .attr("d", valueline(data));
+            svg.select(".x.axis") // change the x axis
+                .duration(750)
+                .call(xAxis);
+            svg.select(".y.axis") // change the y axis
+                .duration(750)
+                .call(yAxis);
+
+        });
+    }
+
+
+
+
+</script>
+
+</body>
+</html>
